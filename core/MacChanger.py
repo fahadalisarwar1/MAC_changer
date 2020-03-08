@@ -16,21 +16,15 @@ class MACChanger:
         ans = regex.search(cmd_result)
 
         found_ip = ans.group().split(" ")[1]
-        print("[+] Found ip: ", found_ip)
-
         return found_ip
 
     def getMAC(self, iface):
         output = subprocess.run(["ifconfig", iface], shell=False, capture_output=True)
-
         pattern = r'ether\s{1}[\da-z]{2}:[\da-z]{2}:[\da-z]{2}:[\da-z]{2}:[\da-z]{2}:[\da-z]{2}'
-
         cmd_result = output.stdout.decode('utf-8')
         regex = re.compile(pattern)
         ans = regex.search(cmd_result)
-
         current_mac = ans.group().split(" ")[1]
-        print("[+] Current MAC is : ", current_mac)
         return current_mac
 
     def Change_MAC(self, iface, newMAC):
