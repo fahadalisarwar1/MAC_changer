@@ -38,11 +38,17 @@ class MACChanger:
         self.MAC = self.getMAC(iface=iface)
         print("[+] Shutting down interface ", iface)
         output = subprocess.run(["ifconfig", iface, "down"], shell=False, capture_output=True)
-        cmd_result = output.stderr.decode('utf-8')
+        err = output.stderr.decode('utf-8')
+        if err != "":
+            print(err)
         print("[+] Changing MAC address to ", newMAC)
         output = subprocess.run(["ifconfig", iface, "hw", "ether", newMAC], shell=False, capture_output=True)
-        cmd_result = output.stderr.decode('utf-8')
+        err = output.stderr.decode('utf-8')
+        if err != "":
+            print(err)
 
         output = subprocess.run(["ifconfig", iface, "up"], shell=False, capture_output=True)
-        cmd_result = output.stderr.decode('utf-8')
+        err = output.stderr.decode('utf-8')
+        if err != "":
+            print(err)
         return self.getMAC(iface)
