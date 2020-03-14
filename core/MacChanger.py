@@ -28,6 +28,15 @@ class MACChanger:
         return current_mac
 
     def Change_MAC(self, iface, newMAC):
+        """ Changes the MAC address on Linux
+        
+        Arguments:
+            iface {string} -- Name of the interface
+            newMAC {string} -- New MAC address that you want to set up
+        
+        Returns:
+            updated_MAC --  Updated MAC address
+                    """        
         print("[+] Changing MAC for ", iface, " to ", newMAC)
         self.MAC = self.getMAC(iface=iface)
         print("[+] Shutting down interface ", iface)
